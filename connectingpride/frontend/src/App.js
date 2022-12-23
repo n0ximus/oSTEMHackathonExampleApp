@@ -6,9 +6,12 @@ import Settings from "./pages/settings/Settings"
 import Login from "./pages/login/Login"
 import CreateAccount from "./pages/createAccount/CreateAccount"
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { useContext } from "react";
+import { Context } from "./context/Context";
+
 
 function App() {
-    const  currentUser = false;
+    const { currentUser } = useContext(Context);
     console.log(currentUser);
     return (
         <Router>
@@ -23,8 +26,8 @@ function App() {
                 <Route path="/login" element={currentUser ? <Home /> : <Login />}></Route>
                 <Route path="/post/:id" element={<PostPage />}>
                 </Route>
-                <Route path="/write" element={currentUser ? <WritePost /> : <Home />}></Route>
-                <Route path="/settings" element={currentUser ? <Settings /> : <Home />}>
+                <Route path="/write" element={currentUser ? <WritePost /> : <Login />}></Route>
+                <Route path="/settings" element={currentUser ? <Settings /> : <Login />}>
                 </Route>
             </Routes>
         </Router>

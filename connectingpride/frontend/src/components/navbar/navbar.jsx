@@ -1,8 +1,20 @@
 import React from 'react'
 import "./navbar.css"
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { Context } from "../../context/Context";
+
+
 
 export default function NavBar() {
+    const { user, dispatch } = useContext(Context);
+
+    /*
+     * handles logging out user 
+     * */
+    const handleLogout = () => {
+        dispatch({ type: "LOGOUT" });
+    };
 
     return (
         <div className="topNav">
@@ -10,49 +22,47 @@ export default function NavBar() {
             <div className="topCenter">
                 <ul className="topNavList">
                     <li className="navListItem Home">
+
+
+
                         <Link className="link" to="/">
                             Home
                         </Link>
-                    </li>
-                    <li className="navListItem About">
-                        About
-            </li>
-                    <li className="navListItem Contact">
-                        Contact
-            </li>
-                    <li className="navListItem Write">
-                        <Link className="link" to="/write">
-                            Write
-                    </Link>
-                    </li>
-                    <li className="navListItem Logout">
-                        Logout
-            </li>
 
+
+                    </li>
+                    <li className="navListItem About"> About </li>
+                    <li className="navListItem Contact"> Contact </li>
+                    <li className="navListItem Write">             <Link className="link" to="/write">
+                        Write
+                    </Link> </li>
+
+                    <li className="navListItem Logout" onClick={handleLogout}>
+                        {user && "Logout"}
+                    </li>
                 </ul>
-
             </div>
             <div className="topRight">
-                <Link className="link" to="/settings">
+                {user ? (
+                    <Link className="link" to="/settings">
+                        <img className="topPfpImg" src="/images/icons/default_pfp.png"alt="/images/icons/default_pfp.png" />
 
-                    <img className="topPfpImg" src="/images/default_pfp.png" alt="/images/default_pfp.png" />
-                </Link>
-                <ul>
-                    <li className="navListItem Logout">
-                        <Link className="link" to="/login">
-                            Login
+                    </Link>
+                ) : (
+                    <ul className="topList">
+                            <li className="navListItem Logout">
+                            <Link className="link" to="/login">
+                                Login
                             </Link>
-                    </li>
-                    <li className="navListItem  Write">
-                        <Link className="link" to="/createAccount">
-                            Create Account
+                        </li>
+                            <li className="navListItem  Write">
+                            <Link className="link" to="/createAccount">
+                                Create Account
                             </Link>
-                    </li>
-                </ul>
-
-
+                        </li>
+                    </ul>
+                )}
             </div>
-        </div>
-    )
 
+        </div>)
 }
