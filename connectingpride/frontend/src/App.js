@@ -26,7 +26,7 @@ function App() {
                 <Route path="/login" element={currentUser ? <Home /> : <Login />}></Route>
                 <Route path="/post/:id" element={<PostPage />}>
                 </Route>
-                <Route path="/write" element={currentUser ? <WritePost /> : <Login />}></Route>
+                <Route path="/write" element={currentUser ? <WritePost /> : <WritePost />}></Route>
                 <Route path="/settings" element={currentUser ? <Settings /> : <Login />}>
                 </Route>
             </Routes>

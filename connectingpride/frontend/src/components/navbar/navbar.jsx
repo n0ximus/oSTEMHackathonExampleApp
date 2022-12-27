@@ -33,13 +33,18 @@ export default function NavBar() {
                     </li>
                     <li className="navListItem About"> About </li>
                     <li className="navListItem Contact"> Contact </li>
+                    {user ? (
+                        <>
+
                     <li className="navListItem Write">             <Link className="link" to="/write">
                         Write
                     </Link> </li>
 
                     <li className="navListItem Logout" onClick={handleLogout}>
                         {user && "Logout"}
-                    </li>
+                    </li></>
+                ) : (<></>)}
+
                 </ul>
             </div>
             <div className="topRight">
